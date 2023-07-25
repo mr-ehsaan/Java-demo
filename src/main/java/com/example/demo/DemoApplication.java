@@ -23,7 +23,7 @@ public class DemoApplication {
     @GetMapping("/{dynamicKey}/get")
     public String getValue(@PathVariable String dynamicKey) {
 		System.out.println("database.get(dynamicKey) >>"+database.get(dynamicKey));
-      if(Boolean.parseBoolean(database.get(dynamicKey))){
+      if(database.get(dynamicKey)!=null){
 		  return String.format(database.get(dynamicKey));
 	  }
 	  return "not found";
@@ -44,7 +44,7 @@ public class DemoApplication {
     @DeleteMapping("/{dynamicKey}/remove")
     public String removeValue(@PathVariable String dynamicKey) {
       database.remove(dynamicKey);
-	  if(Boolean.parseBoolean(database.get(dynamicKey))){
+	  if(database.get(dynamicKey)!=null){
 		  return String.format("data deleted against key "+dynamicKey);
 		}
 		return dynamicKey+" not found";
